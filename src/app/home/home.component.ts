@@ -21,6 +21,8 @@ export class HomeComponent implements OnInit {
   displayedColumns: string[] = ['id', 'first_name', 'last_name', 'email', 'avatar', 'actions'];
   dataSource = new MatTableDataSource<any>([]);
   greetingMessage: string = '';
+  private greetingMessageSet = false;
+
 
   constructor(
     private userService: UserService,
@@ -32,10 +34,10 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadUsers();
-    this.setGreetingMessage()
+    this.setGreetingMessage();
 
     this.translate.onLangChange.subscribe(() => {
-      this.setGreetingMessage()
+      this.setGreetingMessage();
     });
   }
 

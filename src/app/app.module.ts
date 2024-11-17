@@ -6,6 +6,8 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import {BrowserAnimationsModule, NoopAnimationsModule} from "@angular/platform-browser/animations";
+import {StoreModule} from "@ngrx/store";
+import {productReducer} from "./products/product.reducer";
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -20,6 +22,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatSnackBarModule,
     NoopAnimationsModule,
     HttpClientModule,
+    StoreModule.forRoot({ productState: productReducer }),
     MatSnackBarModule,
     TranslateModule.forRoot({
       loader: {

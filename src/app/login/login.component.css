@@ -9,14 +9,13 @@
     height: 100vh;
     justify-content: center;
     align-items: center;
-    background: url('../../assets/images/sunnyhilltech-logo.png') no-repeat center center;
     position: relative;
   }
 
   .right-section {
     flex: 1;
-    display: flex;
-    justify-content: center;
+    display: inline-flex;
+    justify-content: right;
     align-items: center;
     background-color: #fff;
   }

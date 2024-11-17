@@ -8,13 +8,12 @@ import { Observable } from 'rxjs';
 export class AuthService {
   private apiUrl = 'https://reqres.in/api';
 
-
   constructor(private https: HttpClient) {}
 
   login(email: string, password: string): Observable<any> {
     const body = { email, password };
-    return this.https.post(`${this.apiUrl}/register`, body);
-    }
+    return this.https.post(`${this.apiUrl}/login`, body);
+  }
 
   register(email: string, password: string): Observable<any> {
     const body = { email, password };
@@ -23,5 +22,9 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem('token');
+  }
+
+  isAuthenticated(): boolean {
+    return !!localStorage.getItem('token');
   }
 }

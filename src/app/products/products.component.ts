@@ -65,12 +65,17 @@ export class ProductsComponent {
     this.isDialogOpen = true;
   }
 
-  deleteProduct(product:any) {
-    const index = this.products.findIndex(p => p.id === product.id);
-    if (index !== -1) {
-      this.products.splice(index, 1);
+  deleteProduct(product: any): void {
+    const confirmDeletion = window.confirm('Are you sure you want to delete this product?');
+
+    if (confirmDeletion) {
+      const index = this.products.findIndex(p => p.id === product.id);
+      if (index !== -1) {
+        this.products.splice(index, 1);
+      }
     }
   }
+
 
   formatCurrency(value: number): string {
     return '$' + value.toFixed(2);

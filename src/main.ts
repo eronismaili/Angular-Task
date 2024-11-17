@@ -6,6 +6,7 @@ import { routes } from './app/app.routes';
 import {HttpClient, provideHttpClient} from "@angular/common/http";
 import { provideStore } from '@ngrx/store';
 import {HttpLoaderFactory} from "./app/translation-loader";
+import { provideEffects } from '@ngrx/effects';
 
 
 bootstrapApplication(AppComponent, {
@@ -14,11 +15,12 @@ bootstrapApplication(AppComponent, {
     provideHttpClient(),
     provideStore(),
     TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient],
-      },
+        loader: {
+            provide: TranslateLoader,
+            useFactory: HttpLoaderFactory,
+            deps: [HttpClient],
+        },
     }).providers!,
+    provideEffects()
 ]
 }).catch(err => console.error(err));
