@@ -1,17 +1,26 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import {RouterOutlet} from "@angular/router";
 
 @Component({
   selector: 'app-root',
+  templateUrl: './app.component.html',
   standalone: true,
   imports: [
-    CommonModule, 
-    RouterOutlet, 
+    RouterOutlet
   ],
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'my-angular-app';
+  title: string | undefined;
+  constructor(private translate: TranslateService) {
+    const language = localStorage.getItem('language') || 'en';
+    this.translate.use(language);
+  }
+
+  switchLanguage(language: string): void {
+    this.translate.use(language);
+    localStorage.setItem('language', language);
+  }
+
 }

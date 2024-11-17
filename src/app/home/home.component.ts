@@ -3,38 +3,46 @@ import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { UserService } from '../user.service';
-import { MatTableModule } from '@angular/material/table';  
+import { MatSnackBar} from "@angular/material/snack-bar";
+import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import {TranslateModule, TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule,MatTableModule, MatButtonModule,HttpClientModule],  
+  imports: [CommonModule, MatTableModule, MatButtonModule, HttpClientModule, TranslateModule],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
   displayedColumns: string[] = ['id', 'first_name', 'last_name', 'email', 'avatar', 'actions'];
-  dataSource = new MatTableDataSource<any>([]); 
+  dataSource = new MatTableDataSource<any>([]);
   greetingMessage: string = '';
 
   constructor(
     private userService: UserService,
     private router: Router,
     public dialog: MatDialog,
+    private translate: TranslateService,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
     this.loadUsers();
-    this.setGreetingMessage(); 
+    this.setGreetingMessage()
+
+    this.translate.onLangChange.subscribe(() => {
+      this.setGreetingMessage()
+    });
   }
 
   loadUsers(): void {
     this.userService.getUsers().subscribe(
       (response: any) => {
-        this.dataSource.data = response.data; 
+        this.dataSource.data = response.data;
       },
       (error: any) => {
         console.error('Error fetching users:', error);
@@ -46,17 +54,17 @@ export class HomeComponent implements OnInit {
     const currentHour = new Date().getHours();
 
     if (currentHour >= 5 && currentHour < 12) {
-      this.greetingMessage = 'Good Morning!';
+      this.greetingMessage = this.translate.instant('greeting.morning');
     } else if (currentHour >= 12 && currentHour < 18) {
-      this.greetingMessage = 'Good Afternoon!';
+      this.greetingMessage = this.translate.instant('greeting.afternoon');
     } else {
-      this.greetingMessage = 'Good Evening!';
+      this.greetingMessage = this.translate.instant('greeting.evening');
     }
 
     this.openDialog();
     setTimeout(() => {
       this.dialog.closeAll();
-    }, 2000); // 2000 milliseconds = 2 seconds
+    }, 2000);
   }
 
   openDialog(): void {
@@ -75,7 +83,7 @@ export class HomeComponent implements OnInit {
     this.userService.createUser(newUser).subscribe(
       (response: any) => {
         console.log('User added:', response);
-        this.loadUsers(); 
+        this.loadUsers();
       },
       (error: any) => {
         console.error('Error adding user:', error);
@@ -115,11 +123,17 @@ export class HomeComponent implements OnInit {
   logout(): void {
     localStorage.removeItem('token');
     this.router.navigate(['/login']);
+
+    this.snackBar.open(this.translate.instant('logout-success.success'), 'Close', {
+      duration: 3000,
+    });
   }
 }
+
 @Component({
   selector: 'dialog-content',
   template: `<h2>{{ data.message }}</h2>`,
+  standalone: true,
   styles: ['h2 { text-align: center; font-size: 24px; color: #4caf50; }']
 })
 export class DialogContentComponent {

@@ -1,0 +1,29 @@
+{
+  "greeting": {
+    "morning": "Guten Morgen!",
+    "afternoon": "Guten Nachmittag!",
+    "evening": "Guten Abend!"
+  },
+  "logout-success": {
+    "success": "Erfolgreich abgemeldet"
+  },
+  "home": "Zuhause",
+  "products": "Produkte",
+  "login": "Anmelden",
+  "register": "Registrieren",
+  "user-list": "Benutzerliste",
+  "logout": "Abmelden",
+  "first-name": "Vorname",
+  "last-name": "Nachname",
+  "email": "E-Mail",
+  "avatar": "Avatar",
+  "actions": "Aktionen",
+  "add-user": "Benutzer hinzufügen",
+  "name": "Name",
+  "category": "Kategorie",
+  "price": "Preis",
+  "stock": "Lager",
+  "Actions": "Aktionen",
+  "add-product": "Produkt hinzufügen",
+  "password": "Passwort"
+}

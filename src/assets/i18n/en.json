@@ -1,0 +1,30 @@
+{
+  "greeting": {
+    "morning": "Good Morning!",
+    "afternoon": "Good Afternoon!",
+    "evening": "Good Evening!"
+  },
+  "logout-success": {
+    "success": "Successfully logged out"
+  },
+  "home": "Home",
+  "products": "Products",
+  "login": "Login",
+  "register": "Register",
+  "user-list": "User List",
+  "logout": "Logout",
+  "first-name": "First Name",
+  "last-name": "Last Name",
+  "email": "Email",
+  "avatar": "Avatar",
+  "actions": "Actions",
+  "add-user": "Add User",
+  "name": "Name",
+  "category": "Category",
+  "price": "Price",
+  "stock": "Stock",
+  "Actions": "Actions",
+  "add-product": "Add Product",
+  "password": "Password"
+}
+

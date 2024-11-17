@@ -4,12 +4,14 @@ import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { Router } from '@angular/router';
+import {TranslateModule, TranslatePipe, TranslateService} from "@ngx-translate/core";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-product',
   standalone: true,
 
-  imports: [CommonModule,MatTableModule, MatButtonModule,HttpClientModule],  
+  imports: [CommonModule, MatTableModule, MatButtonModule, HttpClientModule, TranslatePipe, TranslateModule],
 
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
@@ -30,13 +32,15 @@ export class ProductsComponent {
   };
   constructor(
     private router: Router,
-  
+    private snackBar: MatSnackBar,
+    private translate: TranslateService
+
   ) {}
 
   isDialogOpen = false;
 
   openProductDialog() {
-    this.product = { name: '', category: '', price: 0, stock: 0, id: null }; 
+    this.product = { name: '', category: '', price: 0, stock: 0, id: null };
     this.isDialogOpen = true;
   }
 
@@ -57,14 +61,14 @@ export class ProductsComponent {
   }
 
   editProduct(product:any) {
-    this.product = { ...product }; 
+    this.product = { ...product };
     this.isDialogOpen = true;
   }
 
   deleteProduct(product:any) {
     const index = this.products.findIndex(p => p.id === product.id);
     if (index !== -1) {
-      this.products.splice(index, 1); 
+      this.products.splice(index, 1);
     }
   }
 
@@ -75,5 +79,9 @@ export class ProductsComponent {
   logout(): void {
     localStorage.removeItem('token');
     this.router.navigate(['/login']);
+
+    this.snackBar.open(this.translate.instant('logout-success.success'), 'Close', {
+      duration: 3000,
+    });
   }
 }

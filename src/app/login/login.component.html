@@ -1,31 +1,33 @@
 <div class="login-container">
-  <div class="left-section"></div>
+  <div class="left-section">
+
+  </div>
 
   <div class="right-section">
     <div class="login-form">
-      <h2 class="text-center">Login</h2>
+      <h2 class="text-center">{{ 'login' | translate }}</h2>
       <form [formGroup]="loginForm" (ngSubmit)="login()">
         <div class="form-group">
-          <label for="email">Email</label>
+          <label for="email">{{ 'email' | translate }}</label>
           <input id="email" formControlName="email" type="email" class="form-control" />
           <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="error-message">
             Please enter a valid email.
           </div>
         </div>
-        
+
         <div class="form-group">
-          <label for="password">Password</label>
+          <label for="password">{{'password' | translate}}</label>
           <input id="password" formControlName="password" type="password" class="form-control" />
           <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="error-message">
             Password is required.
           </div>
         </div>
 
-        <button type="submit" class="btn btn-primary" [disabled]="!loginForm.valid">Login</button>
+        <button type="submit" class="btn btn-primary" [disabled]="!loginForm.valid">{{'login'|translate}}</button>
       </form>
 
       <p class="text-center">
-        Don't have an account? <a href="/register">Register here</a>
+        Don't have an account? <a href="/register">{{ 'register' | translate }}</a>
       </p>
     </div>
   </div>
