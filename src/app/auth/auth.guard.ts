@@ -19,9 +19,8 @@ export class AuthGuard {
   ): Observable<boolean> | Promise<boolean> | boolean {
     const token = localStorage.getItem('token');
     if (token) {
-      return true;  // If the user is logged in, allow access
+      return true;
     } else {
-      // Redirect to login page if not logged in
       this.router.navigate(['/login']);
       return false;
     }
